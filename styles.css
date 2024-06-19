@@ -52,28 +52,40 @@ h1 {
 }
 
 
-
-
 /* Remove o estilo de lista padrão e o preenchimento para a lista de tarefas */
 #task-list {
+    width: 92%;
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 /* Define o estilo para os itens da lista de tarefas */
 #task-list li {
-    background: #f9f9f9;
+    width: 100%;
+    background: #f1f1f1;
     padding: 10px;
     margin-bottom: 5px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    overflow: hidden;
+    border-radius: 3px;
+}
+
+.task-text {
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-right: 10px;
 }
 
 /* Estilo para os botões de ação dentro de cada item de tarefa */
 .action-buttons {
     display: flex;
     gap: 5px;
+    flex-shrink: 0;
 }
 
 /* Estilo para os ícones de ação */
@@ -92,53 +104,38 @@ h1 {
     color: red;
 }
 
-.action-buttons .fa-check:hover {
-    color: rgb(255, 255, 255);
-    background-color: green
-}
-
-.action-buttons .fa-trash:hover {
-    color: rgb(255, 255, 255);
-    background-color: red;
-}
-
-/*Efeito ao clicar*/
+/* Efeito ao clicar */
 .action-buttons .fa-check:active {
     color: green;
-    background-color: rgba(255, 255, 255, 0)
+    background-color: rgba(255, 255, 255, 0);
 }
 
 .action-buttons .fa-trash:active {
     color: red;
-    background-color: rgba(255, 255, 255, 0)
-}
-
-/* Estilo para o botão da tarefa completada */
-
-.completed .fa-trash {
-    color: rgb(141, 141, 141);
-}
-.completed .fa-check {
-    color: rgb(141, 141, 141);
+    background-color: rgba(255, 255, 255, 0);
 }
 
 /* Estilo para o texto da tarefa completada */
 .completed {
-    position: relative; /* Garante que a posição do pseudo-elemento seja relativa a este elemento */
     color: rgb(141, 141, 141);
+    position: relative; /* Garante que a posição do pseudo-elemento seja relativa a este elemento */
+}
+
+.completed .task-text {
+    text-decoration: line-through;
 }
 
 .completed::before {
-    
     content: '';
     display: block;
     position: absolute;
     left: 0;
-    right: 0;
+    right: 70px;
     top: 50%; /* Ajuste conforme necessário para posicionar a linha */
     transform: translateY(-50%);
     border-bottom: 1px solid rgb(141, 141, 141); /* Linha que corta o texto */
 }
+
 /* Estilo para o link "Limpar lista" */
 #clear-list {
     display: block;

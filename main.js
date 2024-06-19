@@ -22,7 +22,7 @@ function addTaskToDOM(taskValue, isCompleted = false) {
 
     // Cria um novo item de lista para a tarefa
     const taskItem = document.createElement('li');
-    taskItem.className = isCompleted ? 'completed' : '';
+    if (isCompleted) taskItem.classList.add('completed');
 
     // Cria um span para o texto da tarefa
     const taskText = document.createElement('span');
