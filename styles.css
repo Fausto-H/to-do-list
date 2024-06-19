@@ -121,9 +121,7 @@ h1 {
     position: relative; /* Garante que a posição do pseudo-elemento seja relativa a este elemento */
 }
 
-.completed .task-text {
-    text-decoration: line-through;
-}
+
 
 .completed::before {
     content: '';
