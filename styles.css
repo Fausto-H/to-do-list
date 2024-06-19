@@ -102,6 +102,17 @@ h1 {
     background-color: red;
 }
 
+/*Efeito ao clicar*/
+.action-buttons .fa-check:active {
+    color: green;
+    background-color: rgba(255, 255, 255, 0)
+}
+
+.action-buttons .fa-trash:active {
+    color: red;
+    background-color: rgba(255, 255, 255, 0)
+}
+
 /* Estilo para o botão da tarefa completada */
 
 .completed .fa-trash {
