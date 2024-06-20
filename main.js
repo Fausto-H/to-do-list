@@ -22,11 +22,12 @@ function addTaskToDOM(taskValue, isCompleted = false) {
 
     // Cria um novo item de lista para a tarefa
     const taskItem = document.createElement('li');
-    if (isCompleted) taskItem.classList.add('completed');
+    taskItem.className = isCompleted ? 'completed' : '';
 
-    // Cria um ícone de pontos para arrastar
-    const dragIcon = document.createElement('i');
-    dragIcon.className = 'fa fa-ellipsis-v drag-handle'; // Ou use 'fa-ellipsis-h' para horizontal
+    // Cria o elemento para arrastar
+    const dragHandle = document.createElement('span');
+    dragHandle.className = 'drag-handle';
+    dragHandle.innerHTML = '<i class="fas fa-ellipsis-v"></i><i class="fas fa-ellipsis-v"></i>';
 
     // Cria um span para o texto da tarefa
     const taskText = document.createElement('span');
@@ -57,8 +58,8 @@ function addTaskToDOM(taskValue, isCompleted = false) {
     actionButtons.appendChild(completeButton);
     actionButtons.appendChild(deleteButton);
 
-    // Adiciona o ícone de arrastar, o span de texto e o contêiner de botões ao item da tarefa
-    taskItem.appendChild(dragIcon);
+    // Adiciona o span de texto, os pontinhos e o contêiner de botões ao item da tarefa
+    taskItem.appendChild(dragHandle);
     taskItem.appendChild(taskText);
     taskItem.appendChild(actionButtons);
 
@@ -67,8 +68,6 @@ function addTaskToDOM(taskValue, isCompleted = false) {
 
     saveTasks(); // Salva as tarefas após adicionar a tarefa
 }
-
-
 
 // Função para adicionar uma nova tarefa
 function addTask() {
@@ -101,18 +100,13 @@ document.getElementById('new-task').addEventListener('keypress', function (event
 });
 
 // Carrega as tarefas do localStorage quando a página é carregada
-document.addEventListener('DOMContentLoaded', () => {
-    loadTasks();
-
-    // Inicializa Sortable na lista de tarefas
-    const taskList = document.getElementById('task-list');
-    Sortable.create(taskList, {
-        animation: 150,
-        onEnd: function() {
-            saveTasks(); // Salva a ordem das tarefas após a reorganização
-        }
-    });
-});
+document.addEventListener('DOMContentLoaded', loadTasks);
 
 // Adiciona um listener para o evento de clique no link "Limpar lista"
 document.getElementById('clear-list').addEventListener('click', clearList);
+
+// Configura o Sortable.js para usar a classe .drag-handle como handle
+new Sortable(document.getElementById('task-list'), {
+    handle: '.drag-handle',
+    animation: 150
+});
