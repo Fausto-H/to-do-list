@@ -24,6 +24,10 @@ function addTaskToDOM(taskValue, isCompleted = false) {
     const taskItem = document.createElement('li');
     if (isCompleted) taskItem.classList.add('completed');
 
+    // Cria um ícone de pontos para arrastar
+    const dragIcon = document.createElement('i');
+    dragIcon.className = 'fa fa-ellipsis-v drag-handle'; // Ou use 'fa-ellipsis-h' para horizontal
+
     // Cria um span para o texto da tarefa
     const taskText = document.createElement('span');
     taskText.className = 'task-text';
@@ -53,7 +57,8 @@ function addTaskToDOM(taskValue, isCompleted = false) {
     actionButtons.appendChild(completeButton);
     actionButtons.appendChild(deleteButton);
 
-    // Adiciona o span de texto e o contêiner de botões ao item da tarefa
+    // Adiciona o ícone de arrastar, o span de texto e o contêiner de botões ao item da tarefa
+    taskItem.appendChild(dragIcon);
     taskItem.appendChild(taskText);
     taskItem.appendChild(actionButtons);
 
@@ -62,6 +67,8 @@ function addTaskToDOM(taskValue, isCompleted = false) {
 
     saveTasks(); // Salva as tarefas após adicionar a tarefa
 }
+
+
 
 // Função para adicionar uma nova tarefa
 function addTask() {
@@ -94,7 +101,18 @@ document.getElementById('new-task').addEventListener('keypress', function (event
 });
 
 // Carrega as tarefas do localStorage quando a página é carregada
-document.addEventListener('DOMContentLoaded', loadTasks);
+document.addEventListener('DOMContentLoaded', () => {
+    loadTasks();
+
+    // Inicializa Sortable na lista de tarefas
+    const taskList = document.getElementById('task-list');
+    Sortable.create(taskList, {
+        animation: 150,
+        onEnd: function() {
+            saveTasks(); // Salva a ordem das tarefas após a reorganização
+        }
+    });
+});
 
 // Adiciona um listener para o evento de clique no link "Limpar lista"
 document.getElementById('clear-list').addEventListener('click', clearList);

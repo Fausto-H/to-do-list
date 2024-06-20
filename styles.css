@@ -122,7 +122,6 @@ h1 {
 }
 
 
-
 .completed::before {
     content: '';
     display: block;
@@ -150,4 +149,48 @@ h1 {
 #clear-list:hover {
     color: #f10000; /* Altera a cor do texto ao passar o mouse */
     text-decoration: underline; /* Adiciona sublinhado ao passar o mouse */
+}
+
+/* Estilo para o ícone de pontos para arrastar */
+.drag-handle {
+    cursor: grab;
+    color: #999;
+    font-size: 16px;
+    margin-right: 10px; /* Espaço entre o ícone e o texto */
+}
+
+/* Ajuste para o ícone de pontos ao passar o mouse */
+#task-list li:hover .drag-handle {
+    color: #666;
+}
+
+/* Efeito ao clicar no ícone de pontos */
+.drag-handle:active {
+    cursor: grabbing;
+}
+
+/* Ajustes para o item da tarefa */
+#task-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    margin-bottom: 5px;
+    background: #f1f1f1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Estilo do rodapé */
+footer {
+    text-align: center;
+    font-size: 12px;
+    color: #888;
+    padding: 10px 0;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background-color: white; /* Pode ser necessário ajustar a cor de fundo */
 }
