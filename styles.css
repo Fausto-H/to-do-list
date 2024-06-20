@@ -126,7 +126,7 @@ h1 {
     content: '';
     display: block;
     position: absolute;
-    left: 0;
+    left: 20px;
     right: 70px;
     top: 50%; /* Ajuste conforme necessário para posicionar a linha */
     transform: translateY(-50%);
