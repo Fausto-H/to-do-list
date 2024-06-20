@@ -4,7 +4,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 100%;
     margin: 0;
     background-color:   #d8d8d8;
 }
@@ -185,9 +185,9 @@ h1 {
 /* Estilo do rodapé */
 footer {
     text-align: center;
-    font-size: 12px;
+    font-size: 10px;
     color: #888;
-    padding: 10px 0;
+    padding: 1px 0;
     width: 100%;
     position: fixed;
     bottom: 0;
