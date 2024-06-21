@@ -23,6 +23,7 @@ function addTaskToDOM(taskValue, isCompleted = false) {
     // Cria um novo item de lista para a tarefa
     const taskItem = document.createElement('li');
     taskItem.className = isCompleted ? 'completed' : '';
+    taskItem.draggable = true; // Torna o item arrastável
 
     // Cria o elemento para arrastar
     const dragHandle = document.createElement('span');
@@ -66,7 +67,42 @@ function addTaskToDOM(taskValue, isCompleted = false) {
     // Adiciona o item da tarefa à lista de tarefas
     taskList.appendChild(taskItem);
 
+    // Adiciona eventos de arrastar e soltar
+    addDragAndDrop(taskItem);
+
     saveTasks(); // Salva as tarefas após adicionar a tarefa
+}
+
+// Função para adicionar suporte a arrastar e soltar
+function addDragAndDrop(taskItem) {
+    taskItem.addEventListener('dragstart', (e) => {
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData('text/html', taskItem.outerHTML);
+        taskItem.classList.add('dragging');
+    });
+
+    taskItem.addEventListener('dragend', (e) => {
+        taskItem.classList.remove('dragging');
+        saveTasks(); // Salva as tarefas após arrastar
+    });
+
+    taskItem.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+
+        const draggingItem = document.querySelector('.dragging');
+        if (draggingItem && draggingItem !== taskItem) {
+            const taskList = document.getElementById('task-list');
+            const bounding = taskItem.getBoundingClientRect();
+            const offset = bounding.y + (bounding.height / 2);
+
+            if (e.clientY - offset > 0) {
+                taskList.insertBefore(draggingItem, taskItem.nextSibling);
+            } else {
+                taskList.insertBefore(draggingItem, taskItem);
+            }
+        }
+    });
 }
 
 // Função para adicionar uma nova tarefa
