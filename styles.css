@@ -4,7 +4,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    
     margin: 0;
     background-color: var(--bg-color);
     color: var(--text-color);
@@ -12,16 +12,40 @@ body {
 
 /* Define o estilo do contêiner que envolve a lista de tarefas */
 .container {
-    background: var(--container-bg-color);
+    margin-top: 40px;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.39);
     width: 300px;
+    max-width: 100%; /* Ocupa toda a largura disponível */
+    max-height: calc(100vh - 40px); /* Altura máxima igual à altura da tela menos o espaço para o cabeçalho */
+    overflow-y: auto; /* Adiciona uma barra de rolagem vertical quando o conteúdo ultrapassa a altura máxima */
+
+    /* Estilos adicionais para a barra de rolagem */
+    scrollbar-width: thin; /* Para Firefox */
+    
+
+
+}
+
+.container::-webkit-scrollbar {
+    width: 8px; /* Largura da barra de rolagem */
+}
+
+.container::-webkit-scrollbar-thumb {
+    background-color: #ccc; /* Cor do botão de rolagem */
+    border-radius: 4px; /* Borda arredondada do botão de rolagem */
+}
+
+.container::-webkit-scrollbar-track {
+    background-color: #f0f0f0; /* Cor de fundo do rastreamento da rolagem */
+    border-radius: 6px; /* Borda arredondada do rastreamento da rolagem */
 }
 
 /* Estilos para o tema claro */
 :root {
-    --bg-color: #d8d8d8;
+    background-color: #f0f0f0; /* Cor do botão de rolagem */
+    --bg-color: #f8f8f8;
     --text-color: #000;
     --container-bg-color: #fff;
     --input-bg-color: #fff;
@@ -35,17 +59,19 @@ body {
     --completed-task-text-color: #8d8d8d;
     --clear-list-color: #686868;
     --clear-list-hover-color: #f10000;
+    scrollbar-color: #ccc #f0f0f0; /* Cor da barra e cor de fundo do rastreamento */
 }
 
 /* Estilos para o tema escuro */
 body.dark {
+    background-color: #141414; /* Cor do botão de rolagem */
     --bg-color: #121212;
     --text-color: #fff;
     --container-bg-color: #1e1e1e;
     --input-bg-color: #2c2c2c;
     --input-text-color: #fff;
     --input-border-color: #555;
-    --button-bg-color: #3a3a3a;
+    --button-bg-color: #257cff;
     --button-text-color: #fff;
     --button-hover-bg-color: #575757;
     --task-bg-color: #2c2c2c;
@@ -53,6 +79,7 @@ body.dark {
     --completed-task-text-color: #8d8d8d;
     --clear-list-color: #aaa;
     --clear-list-hover-color: #f10000;
+    scrollbar-color: #1f1f1f #333333; /* Cor da barra e cor de fundo do rastreamento */
 }
 
 /* Centraliza o texto no elemento <h1> */
@@ -92,7 +119,7 @@ h1 {
 
 /* Remove o estilo de lista padrão e o preenchimento para a lista de tarefas */
 #task-list {
-    width: 92%;
+    width: 100%; /* Largura total do contêiner */
     list-style: none;
     padding: 0;
     margin: 0;
@@ -100,7 +127,7 @@ h1 {
 
 /* Define o estilo para os itens da lista de tarefas */
 #task-list li {
-    width: 100%;
+    width: 93%;
     background: var(--task-bg-color);
     padding: 10px;
     margin-bottom: 5px;
