@@ -4,25 +4,62 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    height: 100vh;
     margin: 0;
-    background-color:   #d8d8d8;
+    background-color: var(--bg-color);
+    color: var(--text-color);
 }
 
 /* Define o estilo do contêiner que envolve a lista de tarefas */
 .container {
-    background: white;
+    background: var(--container-bg-color);
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.39);
     width: 300px;
 }
 
+/* Estilos para o tema claro */
+:root {
+    --bg-color: #d8d8d8;
+    --text-color: #000;
+    --container-bg-color: #fff;
+    --input-bg-color: #fff;
+    --input-text-color: #000;
+    --input-border-color: #ddd;
+    --button-bg-color: #23335f;
+    --button-text-color: #fff;
+    --button-hover-bg-color: #4a5da3;
+    --task-bg-color: #f1f1f1;
+    --task-text-color: #000;
+    --completed-task-text-color: #8d8d8d;
+    --clear-list-color: #686868;
+    --clear-list-hover-color: #f10000;
+}
+
+/* Estilos para o tema escuro */
+body.dark {
+    --bg-color: #121212;
+    --text-color: #fff;
+    --container-bg-color: #1e1e1e;
+    --input-bg-color: #2c2c2c;
+    --input-text-color: #fff;
+    --input-border-color: #555;
+    --button-bg-color: #3a3a3a;
+    --button-text-color: #fff;
+    --button-hover-bg-color: #575757;
+    --task-bg-color: #2c2c2c;
+    --task-text-color: #fff;
+    --completed-task-text-color: #8d8d8d;
+    --clear-list-color: #aaa;
+    --clear-list-hover-color: #f10000;
+}
+
 /* Centraliza o texto no elemento <h1> */
 h1 {
     text-align: center;
     font-size: 18px;
-    color: #23335f;
+    color: var(--text-color);
 }
 
 /* Define o estilo para o campo de entrada de nova tarefa */
@@ -30,27 +67,28 @@ h1 {
     width: calc(85% - 20px);
     padding: 10px;
     margin-bottom: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--input-border-color);
     border-radius: 3px;
+    background-color: var(--input-bg-color);
+    color: var(--input-text-color);
 }
 
 /* Define o estilo para o botão de adicionar tarefa */
 #add-task {
     width: 12%;
     padding: 10px;
-    background-color: #23335f;
-    color: white;
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
     border: none;
     border-radius: 3px;
     cursor: pointer;
-    transition: background-color 0.2s; /* Adiciona uma transição suave para o background-color */
+    transition: background-color 0.2s;
 }
 
 /* Efeito de hover */
 #add-task:hover {
-    background-color: #4a5da3; /* Altera a cor de fundo ao passar o mouse */
+    background-color: var(--button-hover-bg-color);
 }
-
 
 /* Remove o estilo de lista padrão e o preenchimento para a lista de tarefas */
 #task-list {
@@ -63,7 +101,7 @@ h1 {
 /* Define o estilo para os itens da lista de tarefas */
 #task-list li {
     width: 100%;
-    background: #f1f1f1;
+    background: var(--task-bg-color);
     padding: 10px;
     margin-bottom: 5px;
     display: flex;
@@ -79,6 +117,7 @@ h1 {
     text-overflow: ellipsis;
     white-space: nowrap;
     margin-right: 10px;
+    color: var(--task-text-color);
 }
 
 /* Estilo para os botões de ação dentro de cada item de tarefa */
@@ -116,39 +155,38 @@ h1 {
 }
 
 /* Estilo para o texto da tarefa completada */
-.completed {
-    color: rgb(141, 141, 141);
-    position: relative; /* Garante que a posição do pseudo-elemento seja relativa a este elemento */
+.completed .task-text {
+    color: var(--completed-task-text-color);
+    position: relative;
 }
 
-
-.completed::before {
+.completed .task-text::before {
     content: '';
     display: block;
     position: absolute;
-    left: 20px;
-    right: 70px;
-    top: 50%; /* Ajuste conforme necessário para posicionar a linha */
+    left: 0;
+    right: 0;
+    top: 50%;
     transform: translateY(-50%);
-    border-bottom: 1px solid rgb(141, 141, 141); /* Linha que corta o texto */
+    border-bottom: 1px solid var(--completed-task-text-color);
 }
 
 /* Estilo para o link "Limpar lista" */
 #clear-list {
     display: block;
-    margin-top: 15px; /* Espaçamento superior para separar o link da lista */
+    margin-top: 15px;
     text-align: center;
-    color: #686868; /* Cor do texto */
-    text-decoration: none; /* Remove o sublinhado do link */
+    color: var(--clear-list-color);
+    text-decoration: none;
     cursor: pointer;
     font-size: 12px;
     font-weight: bold;
-    transition: color 0.3s, text-decoration 0.3s; /* Transições suaves */
+    transition: color 0.3s, text-decoration 0.3s;
 }
 
 #clear-list:hover {
-    color: #f10000; /* Altera a cor do texto ao passar o mouse */
-    text-decoration: underline; /* Adiciona sublinhado ao passar o mouse */
+    color: var(--clear-list-hover-color);
+    text-decoration: underline;
 }
 
 /* Estilo para o ícone de pontos para arrastar */
@@ -156,7 +194,7 @@ h1 {
     cursor: grab;
     color: #999;
     font-size: 16px;
-    margin-right: 10px; /* Espaço entre o ícone e o texto */
+    margin-right: 10px;
 }
 
 /* Ajuste para o ícone de pontos ao passar o mouse */
@@ -169,16 +207,60 @@ h1 {
     cursor: grabbing;
 }
 
-/* Ajustes para o item da tarefa */
-#task-list li {
+/* Estilo para o botão de alternância de tema */
+.theme-toggle {
+    position: absolute;
+    top: 10px;
+    right: 10px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 10px;
-    margin-bottom: 5px;
-    background: #f1f1f1;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    gap: 10px;
+    font-size: 20px;
+    color: var(--text-color);
 }
 
+/* Estilo para o switch de tema */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 34px;
+    height: 20px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+    transform: translateX(14px);
+}

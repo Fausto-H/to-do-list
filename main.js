@@ -125,6 +125,21 @@ function clearList() {
     }
 }
 
+// Função para alternar o tema
+function toggleTheme() {
+    document.body.classList.toggle('dark');
+    localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+}
+
+// Função para carregar o tema salvo do localStorage
+function loadTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        document.body.classList.toggle('dark', savedTheme === 'dark');
+        document.getElementById('theme-switch').checked = savedTheme === 'dark';
+    }
+}
+
 // Adiciona um listener para o evento de clique no botão "Adicionar Tarefa"
 document.getElementById('add-task').addEventListener('click', addTask);
 
@@ -136,10 +151,16 @@ document.getElementById('new-task').addEventListener('keypress', function (event
 });
 
 // Carrega as tarefas do localStorage quando a página é carregada
-document.addEventListener('DOMContentLoaded', loadTasks);
+document.addEventListener('DOMContentLoaded', () => {
+    loadTasks();
+    loadTheme();
+});
 
 // Adiciona um listener para o evento de clique no link "Limpar lista"
 document.getElementById('clear-list').addEventListener('click', clearList);
+
+// Adiciona um listener para o evento de alternância de tema
+document.getElementById('theme-switch').addEventListener('change', toggleTheme);
 
 // Configura o Sortable.js para usar a classe .drag-handle como handle
 new Sortable(document.getElementById('task-list'), {
