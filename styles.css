@@ -63,8 +63,8 @@ body {
 
 /* Estilos para o tema escuro */
 body.dark {
-    background-color: #141414; /* Cor do botão de rolagem */
-    --bg-color: #121212;
+    background-color: #1d1d1d; /* Cor do botão de rolagem */
+    --bg-color: #161616;
     --text-color: #fff;
     --container-bg-color: #1e1e1e;
     --input-bg-color: #2c2c2c;
