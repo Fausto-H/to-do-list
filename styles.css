@@ -1,11 +1,11 @@
 html{
-    height: 100%;
+    height: 100vh;
 }
 
 /* Define o estilo geral do corpo da página */
 body {
     font-family: Arial, sans-serif;
-    height: 100%;
+    height: 110%;
     display: flex;
     justify-content: center;
     align-items: center;
