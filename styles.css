@@ -16,7 +16,7 @@ body {
 
 /* Define o estilo do contêiner que envolve a lista de tarefas */
 .container {
-    margin-top: 40px;
+    margin-top: 5vh; /* Distância do topo */
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.39);
