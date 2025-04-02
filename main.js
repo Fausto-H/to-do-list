@@ -48,12 +48,14 @@ function addTaskToDOM(taskValue, isCompleted = false) {
     };
 
     // Cria um botão de deletar tarefa com ícone
-    const deleteButton = document.createElement('i');
-    deleteButton.className = 'fa fa-trash';
-    deleteButton.onclick = () => {
+const deleteButton = document.createElement('i');
+deleteButton.className = 'fa fa-trash';
+deleteButton.onclick = () => {
+    if (confirm('Tem certeza de que deseja excluir este item?')) {
         taskItem.remove();
         saveTasks(); // Salva as tarefas após deletar a tarefa
-    };
+    }
+};
 
     // Adiciona os botões ao contêiner de ações
     actionButtons.appendChild(completeButton);
