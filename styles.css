@@ -1,213 +1,163 @@
-html{
-    height: 100vh;
+html {
+    height: 100%;
 }
 
 /* Define o estilo geral do corpo da página */
 body {
-    font-family: Arial, sans-serif;
-    height: 110%;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0;
     background-color: var(--bg-color);
     color: var(--text-color);
+    transition: background-color 0.3s;
 }
 
-/* Define o estilo do contêiner que envolve a lista de tarefas */
+/* Define o estilo do contêiner */
 .container {
-    margin-top: 5vh; /* Distância do topo */
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.39);
-    width: 300px;
-    max-width: 100%; /* Ocupa toda a largura disponível */
-    max-height: calc(100vh - 40px); /* Altura máxima igual à altura da tela menos o espaço para o cabeçalho */
-    overflow-y: auto; /* Adiciona uma barra de rolagem vertical quando o conteúdo ultrapassa a altura máxima */
-
-    /* Estilos adicionais para a barra de rolagem */
-    scrollbar-width: thin; /* Para Firefox */
-}
-
-.container::-webkit-scrollbar {
-    width: 8px; /* Largura da barra de rolagem */
-}
-
-.container::-webkit-scrollbar-thumb {
-    border-radius: 4px; /* Borda arredondada do botão de rolagem */
-}
-
-.container::-webkit-scrollbar-track {
-    border-radius: 6px; /* Borda arredondada do rastreamento da rolagem */
+    padding: 2rem;
+    border-radius: 8px;
+    background-color: var(--container-bg-color);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    width: 90%;
+    max-width: 450px;
+    margin: 20px auto;
 }
 
 /* Estilos para o tema claro */
 :root {
-    background-color: #f0f0f0; /* Cor do botão de rolagem */
-    --bg-color: #f8f8f8;
-    --text-color: #000;
+    --bg-color: #f4f4f9;
+    --text-color: #333;
     --container-bg-color: #fff;
     --input-bg-color: #fff;
-    --input-text-color: #000;
-    --input-border-color: #ddd;
+    --input-text-color: #333;
+    --input-border-color: #ccc;
     --button-bg-color: #23335f;
     --button-text-color: #fff;
     --button-hover-bg-color: #4a5da3;
-    --task-bg-color: #f1f1f1;
-    --task-text-color: #000;
-    --completed-task-text-color: #8d8d8d;
-    --clear-list-color: #686868;
-    --clear-list-hover-color: #f10000;
-    scrollbar-color: #ccc #f0f0f0; /* Cor da barra e cor de fundo do rastreamento */
+    --task-bg-color: #f9f9f9;
+    --task-text-color: #333;
+    --completed-task-text-color: #c1d5bb;
+    --clear-list-color: #666;
+    --clear-list-hover-color: #d9534f;
 }
 
 /* Estilos para o tema escuro */
 body.dark {
-    background-color: #1d1d1d; /* Cor do botão de rolagem */
-    --bg-color: #161616;
-    --text-color: #fff;
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
     --container-bg-color: #1e1e1e;
-    --input-bg-color: #2c2c2c;
+    --input-bg-color: #333;
     --input-text-color: #fff;
-    --input-border-color: #555;
+    --input-border-color: #444;
     --button-bg-color: #257cff;
     --button-text-color: #fff;
-    --button-hover-bg-color: #575757;
+    --button-hover-bg-color: #555;
     --task-bg-color: #2c2c2c;
     --task-text-color: #fff;
-    --completed-task-text-color: #8d8d8d;
+    --completed-task-text-color: #3f4a3d;
     --clear-list-color: #aaa;
-    --clear-list-hover-color: #f10000;
-    scrollbar-color: #1f1f1f #333333; /* Cor da barra e cor de fundo do rastreamento */
+    --clear-list-hover-color: #ff6b6b;
 }
 
-/* Centraliza o texto no elemento <h1> */
 h1 {
     text-align: center;
-    font-size: 18px;
-    color: var(--text-color);
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
-/* Define o estilo para o campo de entrada de nova tarefa */
+/* Input e Botão */
+.input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
 #new-task {
-    width: calc(85% - 20px);
+    flex: 1;
     padding: 10px;
-    margin-bottom: 10px;
     border: 1px solid var(--input-border-color);
-    border-radius: 3px;
+    border-radius: 4px;
     background-color: var(--input-bg-color);
     color: var(--input-text-color);
 }
 
-/* Define o estilo para o botão de adicionar tarefa */
 #add-task {
-    width: 12%;
-    padding: 10px;
+    padding: 10px 20px;
     background-color: var(--button-bg-color);
     color: var(--button-text-color);
     border: none;
-    border-radius: 3px;
+    border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.2s;
 }
 
-/* Efeito de hover */
 #add-task:hover {
     background-color: var(--button-hover-bg-color);
 }
 
-/* Remove o estilo de lista padrão e o preenchimento para a lista de tarefas */
+/* Lista de tarefas */
 #task-list {
-    width: 100%; /* Largura total do contêiner */
     list-style: none;
     padding: 0;
-    margin: 0;
 }
 
-/* Define o estilo para os itens da lista de tarefas */
 #task-list li {
-    width: 93%;
     background: var(--task-bg-color);
     padding: 10px;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    overflow: hidden;
-    border-radius: 3px;
+    border-radius: 4px;
+    border: 1px solid var(--input-border-color);
 }
 
 .task-text {
     flex-grow: 1;
+    margin: 0 10px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    margin-right: 10px;
-    color: var(--task-text-color);
 }
 
-/* Estilo para os botões de ação dentro de cada item de tarefa */
+.completed .task-text {
+    text-decoration: line-through;
+    color: var(--completed-task-text-color);
+}
+
+/* Ações */
 .action-buttons {
     display: flex;
-    gap: 5px;
-    flex-shrink: 0;
+    gap: 10px;
 }
 
-/* Estilo para os ícones de ação */
-.action-buttons .fa {
-    cursor: pointer;
-    font-size: 16px;
-    padding: 5px;
-    border-radius: 3px;
+.fa-check { color: #28a745; cursor: pointer; }
+.fa-trash { color: #d9534f; cursor: pointer; }
+
+/* Drag handle */
+.drag-handle {
+    cursor: grab;
+    color: #999;
 }
 
-.action-buttons .fa-check {
-    color: green;
+/* Outros elementos */
+.theme-toggle {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
 }
 
-.action-buttons .fa-trash {
-    color: red;
-}
-
-/* Efeito ao clicar */
-.action-buttons .fa-check:active {
-    color: green;
-    background-color: rgba(255, 255, 255, 0);
-}
-
-.action-buttons .fa-trash:active {
-    color: red;
-    background-color: rgba(255, 255, 255, 0);
-}
-
-/* Estilo para o texto da tarefa completada */
-.completed .task-text {
-    color: var(--completed-task-text-color);
-    position: relative;
-}
-
-.completed .task-text::before {
-    content: '';
-    display: block;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    border-bottom: 1px solid var(--completed-task-text-color);
-}
-
-/* Estilo para o link "Limpar lista" */
 #clear-list {
     display: block;
-    margin-top: 15px;
+    margin-top: 20px;
     text-align: center;
     color: var(--clear-list-color);
     text-decoration: none;
-    cursor: pointer;
-    font-size: 12px;
-    font-weight: bold;
-    transition: color 0.3s, text-decoration 0.3s;
+    font-size: 0.9rem;
 }
 
 #clear-list:hover {
@@ -215,78 +165,10 @@ h1 {
     text-decoration: underline;
 }
 
-/* Estilo para o ícone de pontos para arrastar */
-.drag-handle {
-    cursor: grab;
-    color: #999;
-    font-size: 16px;
-    margin-right: 10px;
-}
-
-/* Ajuste para o ícone de pontos ao passar o mouse */
-#task-list li:hover .drag-handle {
-    color: #666;
-}
-
-/* Efeito ao clicar no ícone de pontos */
-.drag-handle:active {
-    cursor: grabbing;
-}
-
-/* Estilo para o botão de alternância de tema */
-.theme-toggle {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 20px;
-    color: var(--text-color);
-}
-
-/* Estilo para o switch de tema */
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 34px;
-    height: 20px;
-}
-
-.switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    transition: 0.4s;
-    border-radius: 34px;
-}
-
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 14px;
-    width: 14px;
-    left: 3px;
-    bottom: 3px;
-    background-color: white;
-    transition: 0.4s;
-    border-radius: 50%;
-}
-
-input:checked + .slider {
-    background-color: #2196F3;
-}
-
-input:checked + .slider:before {
-    transform: translateX(14px);
-}
+/* Slider */
+.switch { position: relative; display: inline-block; width: 40px; height: 22px; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: 0.4s; border-radius: 22px; }
+.slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 3px; bottom: 3px; background-color: white; transition: 0.4s; border-radius: 50%; }
+input:checked + .slider { background-color: #2196F3; }
+input:checked + .slider:before { transform: translateX(18px); }
